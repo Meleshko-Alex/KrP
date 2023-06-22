@@ -60,18 +60,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //Import okHttp dependencies
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
-
-    //Import Retrofit dependencies
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
-
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.0")
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
-
-    //implementation 'com.google.auth:google-auth-library-oauth2-http:1.16.0'
 
     dependencies {
         implementation 'com.google.api-client:google-api-client:2.0.0'
