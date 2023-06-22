@@ -25,6 +25,8 @@
     <string name="no_krp">Не вибранний контрольний пунк</string>
     <string name="no_user">Не вибранний користувач</string>
     <string name="wrong_password">Невіврний пароль</string>
+    <string name="wrong_auto_number">Введить номер авто</string>
+    <string name="wrong_driver_name">Введить ПІБ водія</string>
 
 
 
