@@ -23,7 +23,7 @@ class NewRecordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewRecordBinding
     private lateinit var sharedPref: SharedPreferences
     private lateinit var viewModel: NewRecordViewModel
-    val dialog = DialogUtil(this)
+    private val dialog = DialogUtil(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
