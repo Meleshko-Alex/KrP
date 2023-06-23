@@ -22,16 +22,19 @@ class SearchViewModel(
     private val sheetRowDao = db.sheetRowDao()
 
     fun search(searchText: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        if (networkHelper.isOnline()) {
 
-            val titleResult = sheetRowDao.getTitles()
-            Log.i("FFF", "titleResult: $titleResult")
-            launch(Dispatchers.Main) {titles.value = titleResult }
+            viewModelScope.launch(Dispatchers.IO) {
+                val titleResult = sheetRowDao.getTitles()
+                Log.i("FFF", "titleResult: $titleResult")
+                launch(Dispatchers.Main) { titles.value = titleResult }
 
-            val resultList = sheetRowDao.search(searchText)
-            Log.i("FFF", "search: $resultList")
-            launch(Dispatchers.Main) {listRows.value = resultList }
+                val resultList = sheetRowDao.search(searchText)
+                Log.i("FFF", "search: $resultList")
+                launch(Dispatchers.Main) { listRows.value = resultList }
+            }
+        } else {
+            dialogUtil.showDialog("Відсутній інтернет зв'язок")
         }
     }
-
 }

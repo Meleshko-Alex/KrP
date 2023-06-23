@@ -42,6 +42,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun updateRecycler(listResult: List<SheetRow>) {
+        if (listResult.isEmpty()) dialog.showDialog(getString(R.string.empty_search))
         binding.rvResult.layoutManager = LinearLayoutManager(this)
         binding.rvResult.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
         binding.rvResult.adapter = CustomRecyclerAdapter(listResult, titles)

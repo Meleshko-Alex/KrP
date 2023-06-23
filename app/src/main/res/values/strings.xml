@@ -28,6 +28,7 @@
     <string name="wrong_auto_number">Введить номер авто</string>
     <string name="wrong_driver_name">Введить ПІБ водія</string>
     <string name="wrong_search">Потрібно 3 і більше перших літер призвища</string>
+    <string name="empty_search">Нічого не знайдено</string>
 
 
 
