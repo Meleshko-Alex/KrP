@@ -9,6 +9,7 @@ import com.example.krp.data.utils.DialogUtil
 import com.example.krp.data.utils.NetworkHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class SearchViewModel(
     private val dialogUtil: DialogUtil,
@@ -23,15 +24,26 @@ class SearchViewModel(
 
     fun search(searchText: String) {
         if (networkHelper.isOnline()) {
+            try {
+                viewModelScope.launch(Dispatchers.IO) {
+                    val titleResult = sheetRowDao.getTitles()
+                    Log.i("FFF", "titleResult: $titleResult")
+                    if (titleResult != null) {
+                        launch(Dispatchers.Main) { titles.value = titleResult }
+                    } else {
+                        launch(Dispatchers.Main) { dialogUtil.showDialog("Проблеми з данними") }
+                    }
 
-            viewModelScope.launch(Dispatchers.IO) {
-                val titleResult = sheetRowDao.getTitles()
-                Log.i("FFF", "titleResult: $titleResult")
-                launch(Dispatchers.Main) { titles.value = titleResult }
-
-                val resultList = sheetRowDao.search(searchText)
-                Log.i("FFF", "search: $resultList")
-                launch(Dispatchers.Main) { listRows.value = resultList }
+                    val resultList = sheetRowDao.search(searchText)
+                    Log.i("FFF", "search: $resultList")
+                    if (resultList != null) {
+                        launch(Dispatchers.Main) { listRows.value = resultList }
+                    } else {
+                        launch(Dispatchers.Main) { dialogUtil.showDialog("Проблеми з данними") }
+                    }
+                }
+            } catch (e: Exception) {
+                Log.i("FFF", "e: $e")
             }
         } else {
             dialogUtil.showDialog("Відсутній інтернет зв'язок")

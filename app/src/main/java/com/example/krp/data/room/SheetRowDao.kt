@@ -7,7 +7,6 @@ import androidx.room.Query
 
 @Dao
 interface SheetRowDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(sheetRow: SheetRow)
 
@@ -15,8 +14,8 @@ interface SheetRowDao {
     suspend fun getAll(): List<SheetRow>
 
     @Query("SELECT * FROM sheetrow WHERE id = 1")
-    suspend fun getTitles(): SheetRow
+    suspend fun getTitles(): SheetRow?
 
     @Query("SELECT * FROM sheetrow WHERE column_1 LIKE :query || '%'")
-    suspend fun search(query: String): List<SheetRow>
+    suspend fun search(query: String): List<SheetRow>?
 }

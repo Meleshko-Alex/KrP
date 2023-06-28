@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="20dp"
     android:background="@color/yellow"
     android:orientation="vertical">
 
@@ -123,10 +124,4 @@
         tools:text="text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginBottom="40dp"
-        android:layout_height="2dp"
-        android:background="@color/white"/>
 </LinearLayout>
