@@ -41,6 +41,7 @@
         android:id="@+id/rv_result"
         style="@style/EditText"
         android:padding="0dp"
+        android:background="@color/background_green"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
