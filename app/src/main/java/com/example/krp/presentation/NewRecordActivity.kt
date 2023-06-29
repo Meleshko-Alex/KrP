@@ -102,7 +102,6 @@ class NewRecordActivity : AppCompatActivity() {
     }
 
     private fun updateUi(isSuccess: Boolean) {
-        Log.i("AAA", "isSuccess: $isSuccess")
         binding.btnRecord.isEnabled = true
 
         binding.progressBar.visibility = View.GONE
@@ -112,6 +111,8 @@ class NewRecordActivity : AppCompatActivity() {
             binding.tvNumber.text = ""
             binding.etPassengersNames.setText("")
             binding.etAdditionalInfo.setText("")
+
+            dialog.showDialog(getString(R.string.success_record))
         }
     }
 
@@ -122,7 +123,6 @@ class NewRecordActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.VISIBLE
 
         val carNumber = binding.etAutoNum.text.toString()
-        Log.i("AAA", "carNumber = $carNumber")
         val driverFullName = binding.etDriverName.text.toString()
         val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         val time = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())

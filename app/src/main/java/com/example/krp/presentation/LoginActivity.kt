@@ -12,8 +12,13 @@ import androidx.lifecycle.Observer
 import com.example.krp.R
 import com.example.krp.data.utils.DialogUtil
 import com.example.krp.data.utils.NetworkHelper
+import com.example.krp.data.utils.UpdateDbHelper
 import com.example.krp.databinding.ActivityMainBinding
-import com.example.krp.domain.GetKrpListUseCase
+import com.example.krp.domain.usecase.GetKrpListUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.Date
 
 
 const val PASSWORD = "Krp2203+"
@@ -49,7 +54,35 @@ class LoginActivity : AppCompatActivity() {
         viewModel.baseTable.observe(this, listObserver)
         viewModel.getData()
 
+       val updateHelper = UpdateDbHelper(this, assets)
+
+        if (isNeedUpdateDB()) {
+            GlobalScope.launch(Dispatchers.IO) {
+                updateHelper.createOrUpdateBd()
+
+                launch(Dispatchers.Main) {
+                    val editor = sharedPref.edit()
+                    editor.putLong(getString(R.string.update_time__key), Date().time).apply()
+                    Log.i("XXX", "Time is updated")
+                }
+            }
+        }
         initUi()
+    }
+
+    private fun isNeedUpdateDB(): Boolean {
+        val lastUpdate = sharedPref.getLong(getString(R.string.update_time__key), 0)
+        Log.i("XXX", "lastUpdate: ${Date(lastUpdate)}")
+        val currentTime = Date().time
+        val d = (currentTime - lastUpdate).toInt()
+        val delta = d / 3600000
+        Log.i("XXX", "currentTime - lastUpdate: ${currentTime - lastUpdate}")
+
+        Log.i("XXX", "currentTime: ${Date(currentTime)}")
+        Log.i("XXX", "delta: $delta")
+
+        return if (lastUpdate == 0L) true
+        else delta > 24
     }
 
     private fun updateSpinner(list: List<String>) {
@@ -101,7 +134,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun validDate(): Boolean {
-        /*val dialog = DialogUtil(this)
+        val dialog = DialogUtil(this)
         val userName = binding.etUserName.text.toString()
         val password = binding.etPassword.text.toString()
 
@@ -116,7 +149,7 @@ class LoginActivity : AppCompatActivity() {
         if (password != PASSWORD) {
             dialog.showDialog(getString(R.string.wrong_password))
             return false
-        }*/
+        }
 
         return true
     }

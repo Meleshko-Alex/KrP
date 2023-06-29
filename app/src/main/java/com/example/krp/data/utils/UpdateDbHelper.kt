@@ -48,14 +48,13 @@ class UpdateDbHelper(private val context: Context, private val assets: AssetMana
                 sheetRowList.add(sheetRow)
 
                 sheetRowDao.insert(sheetRow)
-                //Log.i("XXX", "INSERTED")
             }
             Log.i("XXX", "FINISH UPDATE")
-            saveLAstUpdateTime()
+            saveLastUpdateTime()
         }
     }
 
-    private fun saveLAstUpdateTime() {
+    private fun saveLastUpdateTime() {
         val sharedPref = context.getSharedPreferences(
             context.getString(R.string.preference_file_key), Context.MODE_PRIVATE
         )
