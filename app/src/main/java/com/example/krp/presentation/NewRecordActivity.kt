@@ -108,7 +108,7 @@ class NewRecordActivity : AppCompatActivity() {
         if (isSuccess) {
             binding.etAutoNum.setText("")
             binding.etDriverName.setText("")
-            binding.tvNumber.text = ""
+            binding.tvNumber.text = "0"
             binding.etPassengersNames.setText("")
             binding.etAdditionalInfo.setText("")
 
